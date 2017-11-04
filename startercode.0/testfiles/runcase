@@ -1,0 +1,102 @@
+ex=~/prog1
+
+cd $LIB/p1
+
+[ ! -e $ex ] && echo Cannot find the program, please build it! && exit 1
+
+ofile=`mktemp`
+
+printonly=0
+[ "$1" = "-v" ] && printonly=1 && shift
+
+case "$1" in
+	nofiles)
+		args=""
+		;;
+
+	badfiles)
+		args="NoSuchFile OrThisOne"
+		;;
+
+	invalidflag)
+		args=" -notanarg"
+		;;
+
+	onefile)
+		args=ozy
+		;;
+
+	manyfile)
+		args="ozy charl peg dedo"
+		;;
+
+	onecount)
+		args="-c peg"
+		;;
+
+	manycount)
+		args="-c ozy charl peg dedo EmpTee"
+		;;
+
+    onemax)
+		args="-m peg"
+		;;
+
+    manymax)
+		args="-m ozy charl peg dedo"
+		;;
+
+    onemc)
+		args="-c -m -m peg"
+		;;
+
+    manymc)
+		args="-m -c ozy charl peg dedo"
+		;;
+
+    oneblank)
+		args="-b peg"
+		;;
+
+    manyblank)
+		args="-b ozy charl peg dedo EmpTee"
+		;;
+
+    oneall)
+		args="-c -m -b peg"
+		;;
+
+    manyall)
+		args="-m -b -c ozy charl peg dedo EmpTee"
+		;;
+
+
+	*)
+		echo "cases are nofiles, badfiles, invalidflag, onefile, manyfile, onecount, manycount,"
+        echo "   onemax, manymax, onemc, manymc, oneblank, manyblank, oneall, manyall"
+        echo "if you run -v casename, this script will print how the case will run but will not run it"
+		exit 1
+		;;
+esac
+
+echo $1:
+
+[ $printonly -eq 1 ] && echo prog1 $args && exit 0
+
+score=0
+
+$ex $args 2>&1 | tee $ofile
+
+diff $ofile ${1}.correct
+
+rc=$?
+
+[ $rc -eq 0 ] && score=1
+
+echo RESULT: $1 "[ " $score " / 1 ]"
+
+rm $ofile
+
+exit $rc
+
+

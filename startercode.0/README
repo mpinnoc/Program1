@@ -1,0 +1,42 @@
+*** To compile your program, press the Build button
+
+*** To run all the test cases, press the Run button
+
+If you want to just run one of the test cases, make sure your program is compiles, then in the Terminal window at the bottom of the screen, type
+
+runcase
+
+If you do that, the program will list all of the test case names.
+
+Pick one of those names and type
+
+runcase CASENAME
+
+where CASENAME is one of the test case names.
+
+If you want to see how runcase will run your program for a particular case without actually running
+the case, type:
+
+runcase -v CASENAME
+
+
+
+The files are in the directory $LIB/p1. You can see the list of files by saying "ls $LIB/p1".
+Files suffixed .correct are the "correct" output for a particular case.
+
+If you want to run your program directly against a given file, you can type
+
+prog1 $LIB/p1/peg
+
+you can use the UNIX cat command to see the contents of any of the files in $LIB/p1
+
+saying
+
+cat $LIB/p1/charl
+
+will give you the contents of that file
+
+All of the files are also zipped up in an archive called testfiles.zip. If you like, you can download this file
+to your own machine and use the various test files to test your program
+
+*** To submit your program (which runs all the test cases first) press the Submit button
